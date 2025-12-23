@@ -82,10 +82,6 @@ main() {
   read -r PVE_MAJOR PVE_MINOR <<<"$(get_pve_major_minor "$PVE_VERSION")"
 
   if [[ "$PVE_MAJOR" == "8" ]]; then
-    if ((PVE_MINOR < 0 || PVE_MINOR > 9)); then
-      msg_error "Unsupported Proxmox 8 version"
-      exit 1
-    fi
     start_routines_8
   elif [[ "$PVE_MAJOR" == "9" ]]; then
     if ((PVE_MINOR < 0 || PVE_MINOR > 1)); then
@@ -95,7 +91,7 @@ main() {
     start_routines_9
   else
     msg_error "Unsupported Proxmox VE major version: $PVE_MAJOR"
-    echo -e "Supported: 8.0–8.9.x and 9.0–9.1.x"
+    echo -e "Supported: 8.x and 9.0–9.1.x"
     exit 1
   fi
 }
